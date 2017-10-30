@@ -6,7 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException; 
 
 public class ConConex {
-	// constructor conexión a bases de datos
+	// constructor conexiÃ³n a bases de datos
 	
 		// Para que la conexion funcione es necesario 
 		// crear el Referenced Libraries con mysql-connector
@@ -25,18 +25,23 @@ public class ConConex {
 				
 				// System.out.println("url " + url);
 				try {
-					conn = (Connection)DriverManager.getConnection(url, usuario, pwd);
-					if (conn != null){
-					//	System.out.println("Conecto a " + conn);
+				    Class.forName("com.mysql.jdbc.Driver");
+	    				try {
+	    					conn = (Connection)DriverManager.getConnection(url, usuario, pwd);
+	    					if (conn != null){
+	    					//	System.out.println("Conecto a " + conn);
+	    					}
+					}
+					
+					catch (SQLException ex){
+						System.out.println("fallo la conexion " + conn);
 					}
 				}
-				
-				catch (SQLException ex){
-					System.out.println("fallo la conexion " + conn);
-				}
+				catch (ClassNotFoundException e) {
+	                       	    System.out.println(e.getMessage());
+	   			}
+		}
 
-			}
-		
 			public void desconectar(){
 				conn = null;
 			}
